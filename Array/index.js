@@ -136,4 +136,4 @@ const removeDuplicatesFromUnSortedArray = (a) => {
     return i
 }
 
-console.log('Remove duplicates from sorted array', removeDuplicatesFromUnSortedArray(a5));
+console.log('Remove duplicates from an unsorted array', removeDuplicatesFromUnSortedArray(a5));
