@@ -100,11 +100,11 @@ const removeDuplicatesFromSortedArray = (a) => {
     let i = 0
     for (let j = 1; j < a.length; j++) {
         const element = a[j];
-        if(element !== a[i]){
+        if (element !== a[i]) {
             i++
             a[i] = element
         }
-        
+
     }
     a.length = i + 1
     return a.length
@@ -125,15 +125,82 @@ const removeDuplicatesFromUnSortedArray = (a) => {
     let i = 0
     for (let j = 0; j < a.length; j++) {
         const element = a[j];
-        if(!seen.has(element)){
+        if (!seen.has(element)) {
             seen.set(element, true)
             a[i] = a[j]
             i++
         }
-        
+
     }
     a.length = i
     return i
 }
 
 console.log('Remove duplicates from an unsorted array', removeDuplicatesFromUnSortedArray(a5));
+
+
+/**
+ * Find the max sum of any subarray of length k
+ */
+
+
+const a6 = [11, 41, 21, 4, 6, 12, 8, 10, 12, 14, 16]
+const k = 3
+
+const findMaxSubArray = (a, k) => {
+    let maxSum = 0;
+    for (let i = 0; i < k; i++) {
+        const element = a[i];
+        maxSum = maxSum + element
+    }
+    let windowSum = maxSum
+
+    for (let j = k; j < a.length; j++) {
+        const element = a[j];
+        windowSum = windowSum - a[j - k] + element
+        if (windowSum > maxSum) {
+            maxSum = windowSum
+        }
+
+    }
+    return maxSum
+}
+
+console.log('Find the max sum of any subarray of length k', findMaxSubArray(a6, k));
+
+
+/**
+ * Longest Substring w/o Repeating Chars
+ */
+
+
+const s1 = 'abcbdafgh'
+
+const findLongestSubstring = (s) => {
+    let longestString = '';
+    let maxLength = 0
+    let start = 0
+    let seen = new Map()
+    for (let end = 0; end < s.length; end++) {
+        const char = s[end];
+
+        if (seen.has(char) && seen.get(char) >= start) {
+            start = seen.get(char) + 1
+        }
+
+        seen.set(char, end)
+
+        const currentLength = end - start + 1
+        if (currentLength > maxLength) {
+            maxLength = currentLength
+            longestString = s.substring(start, end + 1)
+            console.log({longestString});
+            
+            // abc,
+            //
+        }
+    }
+    return longestString
+}
+
+console.log('Longest Substring w/o Repeating Chars', findLongestSubstring(s1));
